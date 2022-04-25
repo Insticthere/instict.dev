@@ -1,0 +1,49 @@
+img {
+    max-width: 100%;
+}
+
+.unnietext {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.3rem;
+}
+
+.unniecontainer {
+    width: 60%;
+    margin: auto;
+}
+
+.unniecontent {
+    align-content: center;
+}
+
+.code {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.3rem;
+    text-align: left !important;
+}
+
+.link {
+    color: #00bcd4;
+    text-decoration: underline;
+}
+
+.unnieheader {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.subtit {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.steps {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.3rem;
+}
+@media screen and (max-width: 760px) {
+    .unniecontainer {
+        width: 95%;
+    }}

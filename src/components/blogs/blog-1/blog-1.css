@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+iframe {
+    max-width: 100%;
+}
+
+.blog1-text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.3rem;
+}
+
+.blog-1-container {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+
+.blog-1-content {
+    width: 80%;
+    margin: auto;
+    max-width: 49rem;
+}
+
+.blog1-code {
+    text-align: left;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(30, 33, 49);
+    background-color: rgb(20 22 33) !important;
+}
+
+.video-div {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+
+.video {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.blog1-text {
+    text-align: left;
+    line-height: 2rem;
+}
+@media screen and (max-width: 1000px) {
+    .blog-1-container {
+        width: 80%;
+    }
+
+    .blog-1-content {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .blog-1-container {
+        width: 85%;
+    }
+
+    .blog-1-content {
+        width: 85%;
+    }
+
+    .blog1-text {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .blog-1-container {
+        width: 100%;
+    }
+
+    .blog-1-content {
+        width: 100%;
+    }
+}

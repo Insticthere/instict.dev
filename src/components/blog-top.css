@@ -1,0 +1,34 @@
+.blogs-div {
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.blogs-title {
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 0%;
+}
+
+.blog-time {
+    font-family: 'Poppins', sans-serif;
+    color: #9eaab7;
+}
+
+.blog-discription {
+    font-family: 'Raleway', sans-serif;
+    color: #9eaab7;
+    margin-top: 0%;
+    font-size: 20px;
+    line-height: 1.7rem;
+    margin-top: 4px;
+}
+
+@media screen and (min-width: 30em) {
+    .blogs-div {
+        padding-top: 5rem;
+    }
+
+    .blog-discription {
+        font-size: 24px;
+    }
+}
+
