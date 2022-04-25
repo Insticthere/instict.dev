@@ -159,7 +159,12 @@ app.get('/code', async function (req, res) {
   })
 });
 
+
+let port = process.env.PORT;
+if (port == null || port === "") {
+  port = 8000;
+}
 client.login('OTU1Mzc2OTQ1Mjc1NzQ0Mjk2.YjgyHQ.nhcGr3EWTWOEvVMe5bFs2x-l5YU');
-server.listen(3000, () => {
-  console.log('listening on *:3000');
+server.listen(port, () => {
+  console.log('deployed');
 });
