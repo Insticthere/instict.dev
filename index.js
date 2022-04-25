@@ -1,78 +1,19 @@
 const express = require('express');
+var app = express();
+const server = require('http').createServer(app);
 const path = require('path');
 const { Client, Intents } = require('discord.js');
 require('dotenv').config()
-const url = require("url");
+const io = require('socket.io')(server, {
+  cors: { origin: "*" }
+});
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES] });
-const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
 function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-const http = require('http').createServer(
-  async (req, res) => {
-    await timeout(3000);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    res.setHeader('Access-Control-Max-Age', 2592000); // 30 days
-    let statuscolor;
-    // Parse the request url
-    const reqUrl = url.parse(req.url).pathname
-    const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
-    const statusz = await instict.presence
-     if(reqUrl === "/status") {
-
-      if(statusz.status in colors) {
-        statuscolor = colors[statusz.status]
-      } else {
-        statuscolor = colors.default;
-      }
-        res.write(statuscolor)
-        res.end()
-    } else if (reqUrl === "/activity") {
-      statusz.activities.forEach(element => {
-        if (element.name === 'Spotify') {
-          const obj = {
-            name: element.name,
-            spotify: element.syncId,
-            top: element.assets.largeText,
-            artist: element.details,
-            album: element.state,
-            url: element?.assets?.largeImageURL() || element?.assets?.smallImageURL() || 'https://cdn.discordapp.com/attachments/678552816117088286/724010795801895936/unknown.png',
-          }
-
-          res.write(JSON.stringify(obj))
-          res.end()
-        
-        }
-      })
-    } else if (reqUrl === "/code") {
-      statusz.activities.forEach(element => {
-        if (element.name === 'Visual Studio Code') {
-          const obj = {
-            name: element?.name,
-            top: element.assets?.largeText,
-            artist: element?.details,
-            album: element?.state,
-            url: element?.assets?.largeImageURL() || element?.assets?.smallImageURL() || 'https://cdn.discordapp.com/attachments/678552816117088286/724010795801895936/unknown.png' ,
-          }
-
-          res.write(JSON.stringify(obj))
-          res.end()
-        
-        }
-      })
-    }
-  }
-);
-const io = require('socket.io')(http, {
-  cors: { origin: "*" }
-});
-
-
 
 let colors = {
     offline: '#747f8d',
@@ -155,12 +96,70 @@ io.on("connection", (socket) => {
     }
   })});
 
-http.listen(8081, () => console.log('listening on http://localhost:8081'));
 
-client.login('OTU1Mzc2OTQ1Mjc1NzQ0Mjk2.YjgyHQ.nhcGr3EWTWOEvVMe5bFs2x-l5YU');
 
-app.get('/*', function (req, res) {
+  app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(9000);
+app.get('/status', async function (req, res) {
+  await timeout(3000);
+  let statuscolor;
+  const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
+  const statusz = await instict.presence
+  if(statusz.status in colors) {
+    statuscolor = colors[statusz.status]
+  } else {
+    statuscolor = colors.default;
+  }
+    res.send(statuscolor)
+    res.end()
+});
+
+app.get('/activity', async function (req, res) {
+  await timeout(3000);
+  const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
+  const statusz = await instict.presence
+  statusz.activities.forEach(element => {
+    if (element.name === 'Spotify') {
+      const obj = {
+        name: element.name,
+        spotify: element.syncId,
+        top: element.assets.largeText,
+        artist: element.details,
+        album: element.state,
+        url: element?.assets?.largeImageURL() || element?.assets?.smallImageURL() || 'https://cdn.discordapp.com/attachments/678552816117088286/724010795801895936/unknown.png',
+      }
+
+      res.write(JSON.stringify(obj))
+      res.end()
+    
+    }
+  })
+});
+
+app.get('/code', async function (req, res) {
+  await timeout(3000);
+  const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
+  const statusz = await instict.presence
+  statusz.activities.forEach(element => {
+    if (element.name === 'Visual Studio Code') {
+      const obj = {
+        name: element?.name,
+        top: element.assets?.largeText,
+        artist: element?.details,
+        album: element?.state,
+        url: element?.assets?.largeImageURL() || element?.assets?.smallImageURL() || 'https://cdn.discordapp.com/attachments/678552816117088286/724010795801895936/unknown.png' ,
+      }
+
+      res.write(JSON.stringify(obj))
+      res.end()
+    
+    }
+  })
+});
+
+client.login('OTU1Mzc2OTQ1Mjc1NzQ0Mjk2.YjgyHQ.nhcGr3EWTWOEvVMe5bFs2x-l5YU');
+server.listen(3000, () => {
+  console.log('listening on *:3000');
+});

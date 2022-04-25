@@ -7,11 +7,11 @@ import { io } from "socket.io-client";
 function Nav(props) {
   const [colors, setcolor] = React.useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8081/status").then((res) => {
+    axios.get("/status").then((res) => {
       setcolor(res.data);
       console.log(res.data);
     });
-    const socket = io("http://localhost:8081");
+    const socket = io();
     socket.on("color", (color) => {
       setcolor(color);
     });

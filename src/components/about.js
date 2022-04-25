@@ -7,10 +7,9 @@ function About() {
   const [spotify, setspotify] = React.useState();
   const [code, setcode] = React.useState();
   useEffect(() => {
-    const socket = io("http://localhost:8081");
+    const socket = io();
     socket.on("activity", (activity) => {
       setspotify(activity);
-      console.log(activity)
     });
     socket.on("stop", (activity) => {
       console.log(activity)
@@ -26,11 +25,11 @@ function About() {
       console.log(activity)
     });
 
-    axios.get('http://localhost:8081/code').then(res => {
+    axios.get('/code').then(res => {
       setcode(res.data);
     })
 
-    axios.get("http://localhost:8081/activity").then((res) => {
+    axios.get("/activity").then((res) => {
       setspotify(res.data);
     })
 
