@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import Headroom from "react-headroom";
 import axios from "axios";
-
 import { io } from "socket.io-client";
 
 function Nav(props) {

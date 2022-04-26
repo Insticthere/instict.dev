@@ -41,7 +41,7 @@ function About() {
         </LazyLoad>
         <h1 className='title'>Instict</h1>
         <p className='description'>
-          Developing since 2018, i have created many bugs. 
+          Developing since 2018, i have created many bugs.
         </p>
         <div>
         {(spotify || code) && <h2 className='subtitle blogheading'>Activity</h2>}

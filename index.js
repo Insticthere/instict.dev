@@ -11,6 +11,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 app.use(express.static(path.join(__dirname, 'build')));
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -96,12 +98,6 @@ io.on("connection", (socket) => {
     }
   })});
 
-
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 app.get('/status', async function (req, res) {
   await timeout(3000);
   let statuscolor;
@@ -159,6 +155,9 @@ app.get('/code', async function (req, res) {
   })
 });
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 let port = process.env.PORT;
 if (port == null || port === "") {
