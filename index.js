@@ -44,16 +44,14 @@ io.on("connection", (socket) => {
   client.on('presenceUpdate', (oldStatus, newStatus) => {
     if (newStatus.userId !== '522317353917087745') return;
     if (newStatus.userId === '522317353917087745') {
-      if (newStatus.activities.length === 0) {
-        console.log('no activity');
         console.log(newStatus.activities.length)
         if(newStatus.status in colors) {
           statuscolor = colors[newStatus.status]
         } else {
           statuscolor = colors.default;
         }
-        socket.emit('color', statuscolor);
-      } else if (newStatus) {
+        socket.emit('color', statuscolor);  
+        if (newStatus) {
         newStatus.activities.forEach(element => {
           if (element.name === 'Spotify') {
             const obj = {
@@ -91,8 +89,6 @@ io.on("connection", (socket) => {
           })
 
         });
-
-
       } 
 
     }
