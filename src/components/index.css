@@ -7,6 +7,7 @@ body {
     background-color: rgb(20 22 33);
     color: white;   
     transition: all 0.5s ease;
+    margin: 0;
 }
 
 /* .navbar {
@@ -58,6 +59,7 @@ body {
     justify-content: space-between;
     height: 100%;
     background-color: #141621;
+    padding-top: 10px;
 }
 
 .navavatar {
