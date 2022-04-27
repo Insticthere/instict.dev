@@ -43,7 +43,6 @@ io.on("connection", (socket) => {
   let statuscolor;
   client.on('presenceUpdate', (oldStatus, newStatus) => {
     if (newStatus.userId !== '522317353917087745') return;
-    if (newStatus.userId === '522317353917087745') {
         console.log(newStatus.activities.length)
         if(newStatus.status in colors) {
           statuscolor = colors[newStatus.status]
@@ -90,9 +89,46 @@ io.on("connection", (socket) => {
 
         });
       } 
+  })
+});
 
-    }
-  })});
+io.on("connection", (socket) => {
+  console.log("connected");
+  client.on('presenceUpdate', (oldStatus, newStatus) => {
+    if (newStatus.userId !== '522317353917087745') return;
+    if (newStatus) {
+      oldStatus.activities.forEach(element => {
+        newStatus.activities.forEach(element => {
+          if (element.name === 'Spotify') {
+            const obj = {
+              name: element.name,
+              spotify: element.syncId,
+              top: element.assets.largeText,
+              artist: element.details,
+              album: element.state,
+              url: element.assets?.largeImageURL(),
+            }
+            socket.emit('activity', obj);
+          } else if (element.name === 'Visual Studio Code') {
+            const obj = {
+              name: element?.name,
+              top: element.assets?.largeText,
+              artist: element?.details,
+              album: element?.state,
+              url: element?.assets?.largeImageURL(),
+            }
+            socket.emit('activitycode', obj);
+          } else if (element.name === 'Spotify' && element.name !== 'Spotify') {
+            socket.emit('stop')
+          } else if (element.name === 'Visual Studio Code' && element.name !== 'Visual Studio Code') {
+            socket.emit('stopcode')
+          }
+        })
+    })
+    } 
+  })
+});
+
 
 app.get('/status', async function (req, res) {
   await timeout(3000);
