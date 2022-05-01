@@ -12,28 +12,24 @@ function About() {
       setspotify(activity);
     });
     socket.on("stop", (activity) => {
-      console.log(activity)
       setspotify();
     });
     socket.on("stopcode", (activity) => {
-      console.log(activity)
       setcode();
     });
-
+    
     socket.on("activitycode", (activity) => {
       setcode(activity);
-      console.log(activity)
     });
 
     axios.get('/code').then(res => {
       setcode(res.data);
-    })
+    });
 
     axios.get("/activity").then((res) => {
       setspotify(res.data);
-    })
-
-  }, []);
+    });
+  }, []); 
   return (
       <section className="info flex" >
         <LazyLoad>

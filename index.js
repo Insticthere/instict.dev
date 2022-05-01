@@ -39,65 +39,35 @@ let colors = {
   });
 
 io.on("connection", (socket) => {
-  console.log("connected");
   let statuscolor;
-  client.on('presenceUpdate', (oldStatus, newStatus) => {
-    if (newStatus.userId !== '522317353917087745') return;
-        console.log(newStatus.activities.length)
-        if(newStatus.status in colors) {
-          statuscolor = colors[newStatus.status]
-        } else {
-          statuscolor = colors.default;
-        }
-        socket.emit('color', statuscolor);  
-        if (newStatus) {
-        newStatus.activities.forEach(element => {
-          if (element.name === 'Spotify') {
-            const obj = {
-              name: element.name,
-              spotify: element.syncId,
-              top: element.assets.largeText,
-              artist: element.details,
-              album: element.state,
-              url: element.assets?.largeImageURL(),
-            }
-            socket.emit('activity', obj);
-          }
-
-          oldStatus.activities.forEach(ele => {
-            if (ele?.name === 'Spotify' && element.name !== 'Spotify') {
-                socket.emit('stop')
-            }
-          })
-
-          if (element.name === 'Visual Studio Code') {
-            const obj = {
-              name: element?.name,
-              top: element.assets?.largeText,
-              artist: element?.details,
-              album: element?.state,
-              url: element?.assets?.largeImageURL(),
-            }
-            socket.emit('activitycode', obj);
-          }
-
-          oldStatus.activities.forEach(ele => {
-            if (ele?.name === 'Visual Studio Code' && element.name !== 'Visual Studio Code') {
-                socket.emit('stopcode')
-            }
-          })
-
-        });
-      } 
-  })
-});
-
-io.on("connection", (socket) => {
   console.log("connected");
   client.on('presenceUpdate', (oldStatus, newStatus) => {
+    const oldActivityNames = oldStatus?.activities.map((activity) => activity.name);
+    const newActivityNames = newStatus?.activities.map((activity) => activity.name);
+
+    const activitiesToRemove = oldActivityNames?.filter((activity) => !newActivityNames.includes(activity));
+
+    const events = {
+        "Visual Studio Code": {
+            stop: () => socket.emit("stopcode")
+        },
+        "Spotify": {
+            stop: () => socket.emit("stop")
+        },
+    };
+
+    activitiesToRemove?.forEach((activityName) => events[activityName]?.stop());
+
+
     if (newStatus.userId !== '522317353917087745') return;
-    if (newStatus) {
-      oldStatus.activities.forEach(element => {
+    if(newStatus.status in colors) {
+      statuscolor = colors[newStatus.status]
+    } else {
+          statuscolor = colors.default;
+    }
+    socket.emit('color', statuscolor);
+
+    if (newStatus.length !== 0) {
         newStatus.activities.forEach(element => {
           if (element.name === 'Spotify') {
             const obj = {
@@ -118,17 +88,13 @@ io.on("connection", (socket) => {
               url: element?.assets?.largeImageURL(),
             }
             socket.emit('activitycode', obj);
-          } else if (element.name === 'Spotify' && element.name !== 'Spotify') {
-            socket.emit('stop')
-          } else if (element.name === 'Visual Studio Code' && element.name !== 'Visual Studio Code') {
-            socket.emit('stopcode')
           }
-        })
-    })
+      })     
     } 
   })
-});
 
+  
+});
 
 app.get('/status', async function (req, res) {
   await timeout(3000);
