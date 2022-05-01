@@ -1,5 +1,4 @@
 const express = require('express');
-require('dotenv').config();
 var app = express();
 const server = require('http').createServer(app);
 const path = require('path');
@@ -162,7 +161,7 @@ let port = process.env.PORT;
 if (port == null || port === "") {
   port = 8000;
 }
-client.login(process.env.TOKEN);
+client.login('OTU1Mzc2OTQ1Mjc1NzQ0Mjk2.YjgyHQ.nhcGr3EWTWOEvVMe5bFs2x-l5YU');
 server.listen(port, () => {
   console.log('deployed');
 });
