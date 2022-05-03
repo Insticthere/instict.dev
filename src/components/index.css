@@ -84,7 +84,7 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(2px, -2px);
+    transform: translate(0px, -4px);
     border: solid 2 px;
     border-color: #141621;
     
