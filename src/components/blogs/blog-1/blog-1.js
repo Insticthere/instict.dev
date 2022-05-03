@@ -4,7 +4,7 @@ import './blog-1.css'
 import Blogtop from "../../blog-top";
 function Blog1() {
   return (
-  <div className="blog1">
+  <div className="blog1 bluez">
       <Nav />
       <div className="blog-1-container">
       <Blogtop 

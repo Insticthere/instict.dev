@@ -4,10 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
 body {
-    background-color: rgb(20 22 33);
+    margin: 0;
     color: white;   
     transition: all 0.5s ease;
-    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(20 22 33);
 }
 
 /* .navbar {
@@ -221,6 +223,18 @@ a {
     padding-top: 10px;
 }
 
+.I {
+    font-family: 'Martel Sans', sans-serif;
+
+}
+
+.I-div {
+    padding: 20px;
+}
+
+.I-top {
+
+}
 
 
 @media screen and (min-width: 62em) {

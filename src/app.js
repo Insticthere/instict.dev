@@ -7,7 +7,7 @@ import "./components/index.css"
 
 function App() {
   return (
-    <div>
+    <div className="bluez">
             <Nav />
             <main className="top-div top">
                     <About />

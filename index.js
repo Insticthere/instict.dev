@@ -3,11 +3,12 @@ var app = express();
 const server = require('http').createServer(app);
 const path = require('path');
 const { Client, Intents } = require('discord.js');
-require('dotenv').config()
 const io = require('socket.io')(server, {
   cors: { origin: "*" }
 });
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES] });
+
+
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -148,6 +149,10 @@ app.get('/code', async function (req, res) {
     
     }
   })
+});
+
+app.get('/instic' , async function (req, res) {
+  res.sendFile(path.join(__dirname+'/client/index.html'))
 });
 
 app.get('/*', function (req, res) {

@@ -2,7 +2,7 @@ import React from "react"
 
 function Project() {
   return (
-    <div className='blog flex'>
+    <div className='blog flex bluez'>
       <h2 className='blogheading'>Projects</h2>
       <a href="unnie">
           <article className='blogs'>
