@@ -42,23 +42,6 @@ io.on("connection", (socket) => {
   let statuscolor;
   console.log("connected");
   client.on('presenceUpdate', (oldStatus, newStatus) => {
-    const oldActivityNames = oldStatus?.activities.map((activity) => activity.name);
-    const newActivityNames = newStatus?.activities.map((activity) => activity.name);
-
-    const activitiesToRemove = oldActivityNames?.filter((activity) => !newActivityNames.includes(activity));
-
-    const events = {
-        "Visual Studio Code": {
-            stop: () => socket.emit("stopcode")
-        },
-        "Spotify": {
-            stop: () => socket.emit("stop")
-        },
-    };
-
-    activitiesToRemove?.forEach((activityName) => events[activityName]?.stop());
-
-
     if (newStatus.userId !== '522317353917087745') return;
     if(newStatus.status in colors) {
       statuscolor = colors[newStatus.status]
@@ -68,6 +51,20 @@ io.on("connection", (socket) => {
     socket.emit('color', statuscolor);
 
     if (newStatus.length !== 0) {
+      const oldActivityNames = oldStatus?.activities.map((activity) => activity.name);
+      const newActivityNames = newStatus?.activities.map((activity) => activity.name);
+  
+      const activitiesToRemove = oldActivityNames?.filter((activity) => !newActivityNames.includes(activity));
+  
+      const events = {
+          "Visual Studio Code": {
+              stop: () => socket.emit("stopcode")
+          },
+          "Spotify": {
+              stop: () => socket.emit("stop")
+          },
+      };
+      activitiesToRemove?.forEach((activityName) => events[activityName]?.stop());
         newStatus.activities.forEach(element => {
           if (element.name === 'Spotify') {
             const obj = {
@@ -97,7 +94,7 @@ io.on("connection", (socket) => {
 });
 
 app.get('/status', async function (req, res) {
-  await timeout(3000);
+  await timeout(6000);
   let statuscolor;
   const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
   const statusz = await instict.presence
@@ -133,7 +130,7 @@ app.get('/activity', async function (req, res) {
 });
 
 app.get('/code', async function (req, res) {
-  await timeout(3000);
+  await timeout(6000);
   const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
   const statusz = await instict.presence
   statusz.activities.forEach(element => {
