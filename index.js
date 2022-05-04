@@ -112,7 +112,7 @@ app.get('/activity', async function (req, res) {
   await timeout(3000);
   const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
   const statusz = await instict.presence
-  statusz.activities.forEach(element => {
+  statusz?.activities.forEach(element => {
     if (element.name === 'Spotify') {
       const obj = {
         name: element.name,
@@ -134,7 +134,7 @@ app.get('/code', async function (req, res) {
   await timeout(6000);
   const instict = await client.guilds.resolve('678552816117088286').members.fetch('522317353917087745')
   const statusz = await instict.presence
-  statusz.activities.forEach(element => {
+  statusz?.activities.forEach(element => {
     if (element.name === 'Visual Studio Code') {
       const obj = {
         name: element?.name,
