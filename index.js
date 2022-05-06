@@ -1,5 +1,6 @@
 const express = require('express');
 var app = express();
+require('dotenv').config();
 const server = require('http').createServer(app);
 const path = require('path');
 const { Client, Intents } = require('discord.js');
@@ -8,10 +9,8 @@ const io = require('socket.io')(server, {
 });
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_PRESENCES] });
 
-
-
 app.use(express.static(path.join(__dirname, 'build')));
-
+// i have no idea why i need both of these but it works this way
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 function timeout(ms) {
@@ -160,10 +159,12 @@ app.get('/*', function (req, res) {
 });
 
 let port = process.env.PORT;
+
 if (port == null || port === "") {
   port = 8000;
 }
-client.login('OTU1Mzc2OTQ1Mjc1NzQ0Mjk2.YjgyHQ.nhcGr3EWTWOEvVMe5bFs2x-l5YU');
+
+client.login(process.env.TOKEN);
 server.listen(port, () => {
   console.log('deployed');
 });
