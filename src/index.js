@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import React from 'react'
 import { BrowserRouter,Route, Routes } from "react-router-dom";
-import App from "./app.js"
-import Blog1 from './components/blogs/blog-1/blog-1.js';
-import Unnie from './components/projects/unnie/unnie.js';
+import App from "./app.jsx"
+import Blog1 from './components/blogs/blog-1/blog-1.jsx';
+import Unnie from './components/projects/unnie/unnie.jsx';
 import I from './components/I.jsx';
 
 const container = document.getElementById('root');
