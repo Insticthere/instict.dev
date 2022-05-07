@@ -1,9 +1,9 @@
-.blogs-div {
+.blog-div {
     padding-top: 2rem;
     text-align: center;
 }
 
-.blogs-title {
+.blog-title {
     font-family: 'Poppins', sans-serif;
     margin-bottom: 0%;
 }
@@ -23,7 +23,7 @@
 }
 
 @media screen and (min-width: 30em) {
-    .blogs-div {
+    .blog-div {
         padding-top: 5rem;
     }
 

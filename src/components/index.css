@@ -12,50 +12,6 @@ body {
     background-color: rgb(20 22 33);
 }
 
-/* .navbar {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    background-color: #141621;
-    padding-top: 10px;
-}
-
-.navavatar {
-    border-radius: 50%;
-    width: 45px;
-} 
-
-.navimg {
-    position: relative;
-    width: 100%;
-}
-
-.navele {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
-    justify-content: flex-start;
-}
-
-.status {
-    height: 13px;
-    width: 13px;
-    border-width: 4px;
-    background-color: #ffffff;
-    border-radius: 100px;
-    border-color: #141621;
-    border-style: solid;
-    transform: translate(26px, -22px);
-} */
-
 .nav {
     display: flex;
     justify-content: space-between;
@@ -184,10 +140,6 @@ a {
     font-size: 13px;
 }
 
-
-
-
-
 .activity-item-image {
     flex-grow: 0;
     flex-shrink: 1;
@@ -231,11 +183,6 @@ a {
 .I-div {
     padding: 20px;
 }
-
-.I-top {
-
-}
-
 
 @media screen and (min-width: 62em) {
     .top {

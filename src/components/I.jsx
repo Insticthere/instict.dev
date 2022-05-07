@@ -15,11 +15,12 @@ function I() {
         <li>will help you with a programming project</li>
         <li>can teach programming</li>
         <li>mess with the weak</li>
-        <li>don't believe in discrimination</li>
+        <li>don't believe in discrimination, but your the weak ones</li>
     </ul>
       </div>
-    
   );
 }
+
+// idk wtf is this
 
 export default I;

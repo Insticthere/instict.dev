@@ -169,7 +169,7 @@ app.get("/code", async function (req, res) {
 });
 
 app.get("/instic", async function (req, res) {
-  res.sendFile(path.join(__dirname + "/client/index.html"));
+  res.sendFile(path.join(__dirname + "/public/instic.html"));
 });
 
 app.get("/*", function (req, res) {
